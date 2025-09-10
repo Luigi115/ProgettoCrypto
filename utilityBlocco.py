@@ -42,6 +42,36 @@ def listaBlocchiTotale():
 
     return blocchi
 
+# Ritorna gli ultimi 'n' blocchi
+def listaUltimiNBlocchi(n):
+    blocchi = []
+    
+    # Prendi l'ultimo blocco
+    lastBlocco = ultimoBlocco()
+    blocchi.append(lastBlocco)
+    
+    # Prendi l'id dell'ultimo blocco
+    idBlocco = lastBlocco["id"]
+
+    # Cicla indietro fino al blocco genesis o fino a n blocchi
+    while len(blocchi) < n:
+        url_blocco = URL + "/block/" + idBlocco
+        response = requests.get(url_blocco)
+        response.raise_for_status()
+        block = response.json()
+
+        if "previousblockhash" in block:
+            idBlocco = block["previousblockhash"]
+            url_prev = URL + "/block/" + idBlocco
+            response = requests.get(url_prev)
+            response.raise_for_status()
+            bloccoPrecedente = response.json()
+            blocchi.append(bloccoPrecedente)
+        else:
+            break  # siamo arrivati al blocco genesis
+
+    return blocchi
+
 
 
 # Stampa tutti i blocchi di una lista in modo semplice

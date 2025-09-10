@@ -1,5 +1,4 @@
 import requests
-from utility import toBinary
 
 URL = "https://mempool.space/api"
 
@@ -10,11 +9,19 @@ def getTransazioni(block_hash):
     response.raise_for_status()
     return response.json()
 
-#Ritorna la coinbase transaction: la prima transazione
+#Ritorna la coinbase transaction di un blocco: la prima transazione
 def getCoinbase(block_hash):
     txs = getTransazioni(block_hash)
     coinbase_tx = txs[0]  # prima transazione
     return coinbase_tx
+
+# Ritorna le coinbase transaction di una lista di blocchi
+def getCoinbaseDaBlocchi(lista_blocchi):
+    coinbase_txs = []
+    for block in lista_blocchi:
+        coinbase_tx = getCoinbase(block["id"])  # usa la funzione già esistente
+        coinbase_txs.append(coinbase_tx)
+    return coinbase_txs
 
 
 # Stampa tutte le transazioni di un blocco in modo leggibile
@@ -36,6 +43,7 @@ def stampaTransazioni(txs):
                 print("    Output", i, "-", script_type, ":", value, "BTC")
         
         print("-" * 50)  # separatore tra le transazioni
+
 
 #Ritorna i dettagli completi di una transazione (JSON)
 def dettagliTransazione(txid):

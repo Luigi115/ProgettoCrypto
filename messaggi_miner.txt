@@ -1,0 +1,50 @@
+Blocco: 00000000000000000001427ffb51b57d5795d5553738181e12cb53c41c247693
+Version(bin): 100001100100001110000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 000000000000000000010dac05de2b34ea33515c2a07d1484dbbd0571d8d356a
+Version(bin): 101001011000111010000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 0000000000000000000063736c6cae7dacbf15d4eb124e826ef2821de31bf22e
+Version(bin): 100010001110010110000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 000000000000000000014606cd2f1ed7ab9455eef915bf4c024553d51f891e62
+Version(bin): 101000011000001000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 000000000000000000020f643361bd5809334e296daaf5df21bb656cd0b198e4
+Version(bin): 100000001000000000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 00000000000000000001cf19be7c276882b4ef61bb92037ea79ce0d3a4bb748b
+Version(bin): 100000001000000000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 0000000000000000000198630ae47214388b6dd17e1b244c2c8fda9186a6f2ab
+Version(bin): 101011110001011100000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 00000000000000000001fca5d03d150a8b3bc513db65e609eacbba7b8e6522a4
+Version(bin): 100100000000000000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 00000000000000000001e6f072f13d5e6011d984baf477c2781c7eb3c6d187dd
+Version(bin): 111111111111110000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
+Blocco: 0000000000000000000192b2a8b3e1ce8bee407614d3a6bff10a77db14386e40
+Version(bin): 100010010111101000000000000000
+  Coinbase OP_RETURN outputs:
+    Nessun output OP_RETURN trovato
+--------------------------------------------------
