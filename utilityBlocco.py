@@ -74,7 +74,7 @@ def listaUltimiNBlocchi(n):
 
 
 
-# Stampa tutti i blocchi di una lista in modo semplice
+# Stampa tutti i blocchi di una lista
 def stampaListaBlocchi(blocks):
     for block in blocks:
         stampaBlocco(block)

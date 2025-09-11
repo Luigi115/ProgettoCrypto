@@ -60,4 +60,6 @@ def stampaMessaggiMinerSuFile(risultati, filename="messaggi_miner.txt"):
     print("Dati salvati su", filename)
 
 
-stampaMessaggiMinerSuFile(estraiMessaggiMiner(listaUltimiNBlocchi(500)))
+#stampaMessaggiMinerSuFile(estraiMessaggiMiner(listaUltimiNBlocchi(500)))
+
+stampaListaBlocchi(listaBlocchi(5))
