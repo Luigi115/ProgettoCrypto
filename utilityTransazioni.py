@@ -45,6 +45,9 @@ def stampaTransazioni(txs):
         print("-" * 50)  # separatore tra le transazioni
 
 
+'''
+Da rivedere
+'''
 #Ritorna i dettagli completi di una transazione (JSON)
 def dettagliTransazione(txid):
     url = URL + "/tx/" + txid
