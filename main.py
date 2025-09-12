@@ -4,6 +4,7 @@ from utility import toBinary
 from utilityMinerMessage import stampaMessaggiMiner, stampaMessaggiMinerSuFile, estraiMessaggiMiner
 from tqdm import tqdm
 
+'''
 # recupera i blocchi
 blocchi = listaUltimiNBlocchi(50)
 
@@ -15,3 +16,6 @@ for block in tqdm(blocchi, desc="Analizzando blocchi", unit="blocco"):
 
 # Stampa e salva su file
 stampaMessaggiMinerSuFile(risultati)
+'''
+
+#stampaTransazioni(getTransazioni(ultimoBlocco()["id"]))

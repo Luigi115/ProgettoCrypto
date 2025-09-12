@@ -4,20 +4,8 @@ from utilityTransazioni import getCoinbase
 from tqdm import tqdm
 from utility import decode_hex_to_text
 
+#Estrae i messaggi dei miner dai blocchi passati.
 def estraiMessaggiMiner(lista_blocchi):
-    """
-    Estrae i messaggi dei miner dai blocchi passati.
-    
-    Per ogni blocco:
-    - Legge il campo vin[0]["coinbase"] (messaggio principale)
-    - Estrae eventuali OP_RETURN negli output della coinbase
-    
-    Ritorna una lista di dizionari con:
-        - block_id: ID del blocco
-        - version_bin: versione del blocco in binario
-        - coinbase_msg: messaggio principale del miner
-        - op_returns: lista di OP_RETURN della coinbase
-    """
     risultati = []
 
     # Barra di progresso globale
