@@ -1,4 +1,5 @@
 import requests
+from tqdm import tqdm
 from utility import toBinary
 
 URL = "https://mempool.space/api"
@@ -51,7 +52,8 @@ def listaUltimiNBlocchi(n):
     idBlocco = lastBlocco["id"]
 
     # Cicla indietro fino al blocco genesis o fino a n blocchi
-    while len(blocchi) < n:
+    # tqdm parte da 1 perché il primo blocco è già aggiunto
+    for _ in tqdm(range(1, n), desc="Recuperando blocchi", unit="blocco"):
         url_blocco = URL + "/block/" + idBlocco
         response = requests.get(url_blocco)
         response.raise_for_status()

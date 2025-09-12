@@ -97,7 +97,7 @@ toBinary(n: int) -> str
 Clona il repository:
 
 ```bash
-git clone https://github.com/tuo-username/ProgettoCrypto.git
+git clone ht6tps://github.com/tuo-username/ProgettoCrypto.git
 cd ProgettoCrypto
 ```
 
