@@ -3,7 +3,13 @@
 Un progetto in Python per esplorare i messaggi lasciati dai miner nei blocchi Bitcoin.  
 L’idea è di estrarre le **coinbase transactions** e gli output di tipo **OP_RETURN**, che i miner usano per inserire messaggi o segnalazioni di aggiornamento.
 Useremo 
+## 📑 Indice
 
+- [ProgettoCrypto](#progettocrypto)
+- [Obiettivo](#obiettivo)
+- [Specifiche tecniche](#specifiche-tecniche)
+- [Funzioni disponibili](#funzioni-disponibili)
+- [Esecuzione (esempio minimo)](#esecuzione-esempio-minimo)
 ## Obiettivo
 - Recuperare i blocchi dalla blockchain.
 - Identificare la **coinbase transaction** (sempre la prima nel blocco).
@@ -92,13 +98,12 @@ Stampa i messaggi dei miner e li salva su file.
 ```text
 toBinary(n: int) -> str
 ```
-## Esecuzione (esempio minimo)
+## Come istallare
 
 Clona il repository:
 
 ```bash
 git clone ht6tps://github.com/tuo-username/ProgettoCrypto.git
-cd ProgettoCrypto
 ```
 
 quindi per eseguire
