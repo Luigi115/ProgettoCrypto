@@ -15,13 +15,17 @@ def getCoinbase(block_hash):
     coinbase_tx = txs[0]  # prima transazione
     return coinbase_tx
 
-# Ritorna le coinbase transaction di una lista di blocchi
+# Ritorna le coinbase transaction di una lista di blocchi, includendo id e numero del blocco
 def getCoinbaseDaBlocchi(lista_blocchi):
     coinbase_txs = []
     for block in lista_blocchi:
-        coinbase_tx = getCoinbase(block["id"])  # usa la funzione già esistente
+        coinbase_tx = getCoinbase(block["id"])  # ottieni la coinbase
+        # Aggiungi info sul blocco
+        coinbase_tx["block_id"] = block["id"]
+        coinbase_tx["block_height"] = block.get("height", None)
         coinbase_txs.append(coinbase_tx)
     return coinbase_txs
+
 
 
 # Stampa tutte le transazioni di un blocco in modo leggibile
