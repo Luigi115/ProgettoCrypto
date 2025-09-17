@@ -1,21 +1,16 @@
 from utilityBlocco import stampaListaBlocchi, listaBlocchiTotale, ultimoBlocco, stampaBlocco, stampaHeader, listaUltimiNBlocchi
-from utilityTransazioni import getTransazioni, stampaTransazioni, dettagliTransazione, getCoinbase, getCoinbaseDaBlocchi
+from utilityTransazioni import getTransazioni, stampaTransazioni, getCoinbase, getCoinbaseDaBlocchi
 from utility import toBinary
-from utilityMinerMessage import stampaMessaggiMiner, stampaMessaggiMinerSuFile, estraiMessaggiMiner
+from utilityMinerMessage import estraiOpReturn, estraiOpReturnJSON
 from tqdm import tqdm
 
-'''
-# recupera i blocchi
-blocchi = listaUltimiNBlocchi(50)
+# Prendi l'ultimo blocco
+blocco = ultimoBlocco()
+coinbase_tx = getCoinbase(blocco["id"])
 
-# estrai dai blocchi i messaggi dei miner con barra
-risultati = []
-for block in tqdm(blocchi, desc="Analizzando blocchi", unit="blocco"):
-    risultati_block = estraiMessaggiMiner([block])  # estraiMessaggiMiner lavora su lista
-    risultati.extend(risultati_block)
+# Estrai e decodifica OP_RETURN in JSON
+op_json = estraiOpReturnJSON(coinbase_tx)
 
-# Stampa e salva su file
-stampaMessaggiMinerSuFile(risultati)
-'''
-
-#stampaTransazioni(getTransazioni(ultimoBlocco()["id"]))
+# Stampa il risultato
+import json
+print(json.dumps(op_json, indent=2))
