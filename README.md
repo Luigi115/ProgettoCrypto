@@ -2,7 +2,7 @@
 
 Un progetto in Python per esplorare i messaggi lasciati dai miner nei blocchi Bitcoin.  
 L’idea è di estrarre le **coinbase transactions** e gli output di tipo **OP_RETURN**, che i miner usano per inserire messaggi o segnalazioni di aggiornamento.
-Useremo 
+
 ## 📑 Indice
 
 - [ProgettoCrypto](#progettocrypto)
@@ -10,6 +10,7 @@ Useremo
 - [Specifiche tecniche](#specifiche-tecniche)
 - [Funzioni disponibili](#funzioni-disponibili)
 - [Esecuzione (esempio minimo)](#esecuzione-esempio-minimo)
+
 ## Obiettivo
 - Recuperare i blocchi dalla blockchain.
 - Identificare la **coinbase transaction** (sempre la prima nel blocco).
@@ -20,93 +21,47 @@ Useremo
 
 ## Specifiche tecniche
 - **Linguaggio:** Python 3.11+  
-- **Dipendenze:** `requests` (installare con `pip install requests`)  
+- **Dipendenze:** `requests`, `tqdm` (installare con `pip install requests tqdm`)  
 - **Dati:** blocchi recuperati tramite API pubbliche da [mempool](https://mempool.space/it/).
 
 ## Funzioni disponibili
 
-```text
-ultimoBlocco() -> dict
-```
-Ritorna l'ultimo blocco minato dalla blockchain tramite API mempool.
+### Utility generali
+- `toBinary(n: int) -> str` : converte un numero in binario (senza prefisso `0b`).  
+- `decode_hex_to_text(hex_str: str) -> str` : decodifica un messaggio esadecimale in testo UTF-8, ignora errori.
 
-```text
-stampaBlocco(block: dict) -> None
-```
-Stampa a video i dati principali di un blocco (altezza, id, timestamp, numero transazioni, miner).
+### Blocco singolo
+- `ultimoBlocco() -> dict` : ritorna l'ultimo blocco minato dalla blockchain tramite API mempool.  
+- `stampaBlocco(block: dict) -> None` : stampa a video i dati principali di un blocco (altezza, id, timestamp, numero transazioni, miner).  
+- `stampaHeader(block: dict) -> None` : mostra a video l'header del blocco, convertendo la versione in formato binario.
 
-```text
-stampaHeader(block: dict) -> None
-```
-Mostra a video l'header del blocco, convertendo anche la versione in formato binario.
+### Lista blocchi
+- `listaUltimiNBlocchi(n: int) -> list` : recupera gli ultimi n blocchi partendo dall'ultimo e andando a ritroso.  
+- `listaBlocchiTotale() -> list` : raccoglie tutti i blocchi della blockchain a partire dall'ultimo fino al genesis.  
+- `stampaListaBlocchi(blocks: list) -> None` : stampa in sequenza i dettagli di una lista di blocchi.
 
-```text
-listaUltimiNBlocchi(n: int) -> list
-```
-Recupera gli ultimi n blocchi partendo dall'ultimo e andando a ritroso.
+### Transazioni
+- `getTransazioni(block_hash: str) -> list` : restituisce la lista di transazioni associate a un blocco.  
+- `getCoinbase(block_hash: str) -> dict` : estrae la prima transazione di un blocco (coinbase transaction).  
+- `getCoinbaseDaBlocchi(lista_blocchi: list) -> list` : restituisce le coinbase transaction di tutti i blocchi forniti in input, includendo id e altezza del blocco.  
+- `stampaTransazioni(txs: list) -> None` : stampa in maniera leggibile le transazioni di un blocco (input, output e OP_RETURN).
 
-```text
-listaBlocchiTotale() -> list
-```
-Raccoglie tutti i blocchi della blockchain a partire dall'ultimo fino al genesis.
+### OP_RETURN e messaggi miner
+- `estraiOpReturn(tx: dict) -> list` : estrae tutti gli output OP_RETURN da una transazione.  
+- `estraiOpReturnDaTransazioni(transazioni: list) -> list` : estrae tutti gli OP_RETURN da una lista di transazioni, includendo info sul blocco.  
+- `filtraOpReturnPerBlocco(lista_blocchi: list) -> list` : restituisce solo block_height e lista OP_RETURN di ogni blocco.  
+- `stampaOpReturnPerBlocco(lista_blocchi: list) -> None` : stampa a video gli OP_RETURN per blocco.  
+- `estraiOpReturnJSON(tx: dict) -> dict` : decodifica gli OP_RETURN e li restituisce in formato JSON.
 
-```text
-stampaListaBlocchi(blocks: list) -> None
-```
-Stampa in sequenza i dettagli di una lista di blocchi.
+## Come installare
 
-```text
-getTransazioni(block_hash: str) -> list
-```
-Restituisce la lista di transazioni associate a un blocco.
-
-```text
-getCoinbase(block_hash: str) -> dict
-```
-Estrae la prima transazione di un blocco (coinbase transaction).
-
-```text
-getCoinbaseDaBlocchi(lista_blocchi: list) -> list
-```
-Restituisce le coinbase transaction di tutti i blocchi forniti in input.
-
-```text
-stampaTransazioni(txs: list) -> None
-```
-Stampa in maniera leggibile le transazioni di un blocco (input, output e OP_RETURN).
-
-```text
-dettagliTransazione(txid: str) -> dict
-```
-Recupera i dettagli completi di una transazione a partire dal suo ID.
-
-```text
-estraiMessaggiMiner(lista_blocchi: list) -> list
-```
-Estrae e raccoglie i messaggi OP_RETURN dai blocchi forniti.
-
-```text
-stampaMessaggiMiner(risultati: list) -> None
-```
-Mostra a video i messaggi OP_RETURN trovati nei blocchi.
-
-```text
-stampaMessaggiMinerSuFile(risultati: list, filename: str = "messaggi_miner.txt") -> None
-```
-Stampa i messaggi dei miner e li salva su file.
-
-```text
-toBinary(n: int) -> str
-```
-## Come istallare
-
-Clona il repository:
+Clona il repository ed esegui il progetto:
 
 ```bash
-git clone ht6tps://github.com/tuo-username/ProgettoCrypto.git
+git clone https://github.com/tuo-username/ProgettoCrypto.git
 ```
 
-quindi per eseguire
 ```bash
+cd ProgettoCrypto
 python main.py
 ```

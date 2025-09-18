@@ -52,10 +52,7 @@ def filtraOpReturnPerBlocco(lista_blocchi):
 def stampaOpReturnPerBlocco(lista_blocchi):
     for blocco in lista_blocchi:
         print(f"Blocco numero: {blocco.get('block_height')}")
-<<<<<<< HEAD
-=======
         print("-" * 50)
->>>>>>> 9d073339f453e381335bad9623fbcbfa9b50c661
         op_return_list = blocco.get("op_return", [])
         for idx, op in enumerate(op_return_list, 1):
             print(f"{idx}. {op}")
