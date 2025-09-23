@@ -136,5 +136,4 @@ def print_categorized_messages(categorized):
             continue
 
         for entry in items:
-            print(f"  Blocco {entry['block_height']}, Messaggio {entry['messaggio_n']}:")
-            print(f"    {entry['contenuto']}")
+            print(f"  Blocco {entry['block_height']}, Messaggio {entry['messaggio_n']}: {entry['contenuto']}")

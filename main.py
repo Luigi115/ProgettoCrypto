@@ -7,4 +7,4 @@ from tqdm import tqdm
 #print(filtraOpReturnPerBlocco(estraiOpReturnDaTransazioni(getCoinbaseDaBlocchi(listaUltimiNBlocchi(1)))))
 #print("---------------------------------------------")
 #print_op_return_messages(collect_op_return_messages(filtraOpReturnPerBlocco(estraiOpReturnDaTransazioni(getCoinbaseDaBlocchi(listaUltimiNBlocchi(10))))))
-print_categorized_messages(categorize_messages(collect_op_return_messages(filtraOpReturnPerBlocco(estraiOpReturnDaTransazioni(getCoinbaseDaBlocchi(listaUltimiNBlocchi(10)))))))
+print_categorized_messages(categorize_messages(collect_op_return_messages(filtraOpReturnPerBlocco(estraiOpReturnDaTransazioni(getCoinbaseDaBlocchi(listaUltimiNBlocchi(5)))))))
