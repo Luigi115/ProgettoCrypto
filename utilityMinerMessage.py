@@ -2,6 +2,8 @@ from tqdm import tqdm
 from utility import toBinary, decode_hex_to_text, filtra_ascii
 from utilityTransazioni import getCoinbase
 import string
+import matplotlib.pyplot as plt
+import numpy as np
 
 #Estrae tutti gli output OP_RETURN da una transazione.
 def estraiOpReturn(tx):
@@ -137,3 +139,93 @@ def print_categorized_messages(categorized):
 
         for entry in items:
             print(f"  Blocco {entry['block_height']}, Messaggio {entry['messaggio_n']}: {entry['contenuto']}")
+
+
+
+def analizza_opreturn(dati):
+    # 'dati' è il dizionario categorizzato: {'CORE': [{...}], 'RSKBLOCK': [{...}], ...}
+    
+    # Inizializza i contatori necessari
+    totali_per_blocco_dict = {}
+    categorie_counter = {} # Useremo un dizionario per il conteggio totale delle categorie
+
+    # 1. Raggruppa i messaggi per Blocco (Block Height) e conta le categorie
+    # Questo loop risolve il problema del NameError e del Grafico 1
+    for categoria, items in dati.items():
+        # Conteggio per il Grafico 2 (Torta)
+        categorie_counter[categoria] = len(items) 
+
+        # Itera su tutti i messaggi per contare gli OP_RETURN per Blocco
+        for item in items:
+            # Assicurati che l'elemento abbia 'block_height'
+            height = item.get('block_height')
+            if height is not None:
+                # Conteggio per il Grafico 1 (Barre): raggruppa per Block Height
+                totali_per_blocco_dict[height] = totali_per_blocco_dict.get(height, 0) + 1
+
+    # 2. Prepara le liste per il Grafico 1 (Barre)
+    # Ordina i blocchi per Block Height per un grafico coerente
+    blocchi_ordinati = sorted(totali_per_blocco_dict.items())
+
+    # Prepara le liste finali per Matplotlib
+    labels_blocchi = [str(height) for height, total in blocchi_ordinati]
+    totali_per_blocco = [total for height, total in blocchi_ordinati]
+
+    # --- Analisi e Stampa ---
+
+    # Statistiche base
+    if not totali_per_blocco:
+        print("Nessun OP_RETURN trovato nei dati forniti.")
+        return # Esci se non ci sono dati
+        
+    media = sum(totali_per_blocco) / len(totali_per_blocco)
+    print(f"Numero medio di OP_RETURN per blocco: {media:.2f}")
+
+    # Distribuzione per blocco (stampa)
+    print("\nDistribuzione OP_RETURN per Blocco:")
+    for height, totale in zip(labels_blocchi, totali_per_blocco):
+        print(f"Blocco {height}: {totale} OP_RETURN")
+    
+    # --------------------------------------------------------------------------
+    ## 🔹 Grafico 1: OP_RETURN per blocco (bar chart)
+    # --------------------------------------------------------------------------
+    x = np.arange(len(totali_per_blocco))
+    plt.figure(figsize=(10,5))
+    bars = plt.bar(x, totali_per_blocco, color="skyblue", edgecolor="black")
+    plt.axhline(media, color="red", linestyle="--", label=f"Media = {media:.2f}")
+    plt.xlabel("Block Height")
+    plt.ylabel("Numero OP_RETURN")
+    plt.title("Numero di OP_RETURN per blocco")
+    
+    # Imposta le etichette con rotazione
+    plt.xticks(x, labels_blocchi, rotation=45, ha='right')
+    plt.legend()
+    plt.tight_layout()
+
+    # Annotazioni sopra le barre
+    for bar in bars:
+        h = bar.get_height()
+        plt.annotate(f'{int(h)}',
+                     xy=(bar.get_x() + bar.get_width() / 2, h),
+                     xytext=(0, 3),
+                     textcoords="offset points",
+                     ha='center', va='bottom')
+
+    plt.show()
+
+    # --------------------------------------------------------------------------
+    ## 🔹 Grafico 2: Distribuzione per categorie (torta)
+    # --------------------------------------------------------------------------
+    
+    # Rimuovi le categorie con conteggio zero prima di plottare
+    categorie_totali_filtrate = {k: v for k, v in categorie_counter.items() if v > 0}
+    
+    if sum(categorie_totali_filtrate.values()) > 0:
+        labels_cat = list(categorie_totali_filtrate.keys())
+        sizes = list(categorie_totali_filtrate.values())
+        
+        plt.figure(figsize=(6,6))
+        plt.pie(sizes, labels=labels_cat, autopct='%1.1f%%', startangle=140)
+        plt.title("Distribuzione OP_RETURN per categoria")
+        plt.tight_layout()
+        plt.show()
